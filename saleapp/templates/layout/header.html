@@ -5,18 +5,21 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav me-auto">
-                <a class="nav-link active" href="/">Trang chu</a>
 
+            <ul class="navbar-nav me-auto">
+                <a class="nav-link active" href="/">Trang chủ</a>
                 {% for c in categories%}
                 <li class="nav-item">
-                    <a class="nav-link" href="?category={{c.id}}">{{c.name}}</a>
+                    <a class="nav-link" href="/?category_id={{c.id}}">{{c.name}}</a>
                 </li>
                 {%endfor%}
+                <li class="nav-item">
+                    <a class="nav-link text-info" href="/login">	&#128507; Dang nhap</a>
+                </li>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" name="q" type="text" placeholder="Search">
-                <button class="btn btn-primary" type="submit">Search</button>
+                <input class="form-control me-2" name="q" type="text" placeholder="Nhập từ khóa...">
+                <button class="btn btn-primary" type="submit">Tìm</button>
             </form>
         </div>
     </div>

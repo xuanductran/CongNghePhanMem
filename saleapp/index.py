@@ -1,21 +1,33 @@
-from flask import Flask, render_template, request
+from flask import render_template, request,redirect
 import dao
+from saleapp import app
 
-app = Flask(__name__)
 
 @app.route('/')
 def index():
     q = request.args.get("q")
-    c_id = request.args.get("category")
+    cate_id = request.args.get("category_id")
+    products = dao.load_products(q=q, cate_id=cate_id)
+    print("cate : "+ cate_id)
+    return render_template('index.html', products=products)
 
-    products = dao.load_products(q, c_id)
-    categories = common_attributes()["categories"]  # Gọi hàm để lấy categories
-    return render_template('index.html', categories=categories, products=products)
 
-@app.route('/product/<int:id>')
-def get_product(id):
+@app.route('/products/<int:id>')
+def details(id):
     product = dao.load_product_by_id(id)
-    return render_template('product.html', product=product)
+    return render_template('product-details.html', product = product)
+
+@app.route('/login',methods=['get','post'])
+def login_user():
+    if(request.method.__eq__("POST")):
+        print(request.form)
+        name = request.form.get("user")
+        password = request.form.get("password")
+        if(name.__eq__("admin") and password.__eq__("123")):
+            return redirect('/')
+    return render_template('login.html',)
+
+
 
 @app.context_processor
 def common_attributes():
@@ -24,4 +36,5 @@ def common_attributes():
     }
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    with app.app_context():
+        app.run(debug=True)

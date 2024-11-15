@@ -1,0 +1,24 @@
+{%extends 'layout/base.html'%}
+
+
+{%block content%}
+<h1>Dang nhap</h1>
+<form method="post" action="/login">
+
+
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="user"
+               placeholder="Enter email" name="user" pattern="[A-Za-z0-9]*" required>
+        <label for="user">user</label>
+    </div>
+
+    <div class="form-floating mt-3 mb-3">
+        <input type="password" class="form-control"
+               id="password" placeholder="Enter password" name="password" required>
+        <label for="password">Password</label>
+    </div>
+    <div class="form-floating mt-3 mb-3">
+        <button class="btn btn-primary" type="submit">Dang nhap</button>
+    </div>
+</form>
+{%endblock%}
